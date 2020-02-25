@@ -1,5 +1,6 @@
-import { Table, Model, Column, BeforeSave, BeforeUpdate } from 'sequelize-typescript';
+import { Table, Model, Column, BeforeSave, BeforeUpdate, HasMany } from 'sequelize-typescript';
 import { hashSync } from 'bcryptjs';
+import { Rent } from 'src/rent/rent.model';
 
 @Table
 export class User extends Model<User>{
@@ -25,6 +26,8 @@ export class User extends Model<User>{
     @Column({ values: ['administrador', 'usuario'], defaultValue: 'usuario' })
     rol: string;
 
+    @HasMany(() => Rent)
+    rents: Rent[];
     /**
      * Hash password if it has changed.
      * 

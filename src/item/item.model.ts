@@ -10,5 +10,5 @@ export class Item extends Model<Item>{
     price: number;
 
     @Column({ allowNull: false, defaultValue: 0 })
-    amoutn: number;
+    amount: number;
 }
