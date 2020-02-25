@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize'
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     SequelizeModule.forRoot({
       dialect: 'mysql',
       host: process.env.DB_HOST,
@@ -18,9 +19,10 @@ import { UsersModule } from './users/users.module';
       synchronize: true,
       autoLoadModels: true
     }),
-    UsersModule
+    UsersModule,
+    ItemModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }

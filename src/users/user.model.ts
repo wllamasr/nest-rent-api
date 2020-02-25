@@ -1,9 +1,10 @@
 import { Table, Model, Column, BeforeSave, BeforeUpdate } from 'sequelize-typescript';
 import { hashSync } from 'bcryptjs';
+
 @Table
 export class User extends Model<User>{
 
-    @Column
+    @Column({ allowNull: false })
     name: string;
 
     @Column({ unique: true, validate: { isEmail: true } })
@@ -20,6 +21,9 @@ export class User extends Model<User>{
 
     @Column({ allowNull: false })
     address: string;
+
+    @Column({ values: ['administrador', 'usuario'], defaultValue: 'usuario' })
+    rol: string;
 
     /**
      * Hash password if it has changed.

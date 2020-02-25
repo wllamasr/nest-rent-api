@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Delete, Put } from '@nestjs/common';
 import { CreateUserValidator } from './validators/create-user.validator';
 import { UserService } from './user.service';
 
@@ -30,5 +30,16 @@ export class UsersController {
     @Get()
     list() {
         return this.userService.list();
+    }
+
+    /**
+     * Get an user by id
+     * 
+     * @param id | User's ID
+     * @returns User 
+     */
+    @Get(':id')
+    findOne(@Param('id') id: number) {
+        return this.userService.get(id);
     }
 }

@@ -19,4 +19,8 @@ export class UserService {
     list() {
         return this.userModel.findAll();
     }
+
+    get(id: number) {
+        return this.userModel.findOne({ where: { id } });
+    }
 }
