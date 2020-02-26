@@ -34,10 +34,11 @@ export default () => ({
         "createdAt": "2020-02-26T13:30:07.000Z",
         "updatedAt": "2020-02-26T13:30:07.000Z"
     }),
-    build: async () => ({
+    build: () => ({
         "name": "Rhianna DuBuque",
         "price": 456789,
         "amount": 56,
+        save: () => true
     }),
     save: () => ({
         "id": 6,

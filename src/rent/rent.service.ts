@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Rent } from './rent.model';
-import { Item } from 'src/item/item.model';
+import { Item } from '../item/item.model';
 
 @Injectable()
 export class RentService {
@@ -20,6 +20,7 @@ export class RentService {
     }
 
     async create(body: any): Promise<Rent | HttpException> {
+        console.log(Rent)
         const item = await Item.findByPk(body.item_id)
 
         if (!await item.isAvailable()) {

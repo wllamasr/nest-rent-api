@@ -6,6 +6,7 @@ import mockItem from './mock/item.mock';
 
 describe('ItemService', () => {
   let itemService: ItemService;
+  let item: Item;
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
@@ -15,7 +16,8 @@ describe('ItemService', () => {
           useValue: mockItem()
         }
       ],
-    }).compile();
+    })
+      .compile();
 
     itemService = module.get<ItemService>(ItemService);
   });
@@ -30,6 +32,19 @@ describe('ItemService', () => {
       expect(result).toBeDefined()
       expect(Array.isArray(result)).toBeTruthy();
       expect(result.length).toEqual(3);
+    })
+  })
+
+  describe('create', () => {
+    it('create a new item', async () => {
+      const body = {
+        "name": "item",
+        "price": 456789,
+        "amount": 56
+      }
+      const result = await itemService.create(body);
+      expect(result).toBeDefined();
+      expect(typeof result).toBe('object');
     })
   })
 
