@@ -1,15 +1,18 @@
-import { Table, Model, Column, HasOne, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { Item } from 'src/item/item.model';
-import { User } from 'src/users/user.model';
-
+import { Table, Model, Column, HasOne, ForeignKey, BelongsTo, DataType, BeforeSave } from 'sequelize-typescript';
+import { Item } from '../item/item.model';
+import { User } from '../users/user.model';
+import moment from 'moment';
 @Table
 export class Rent extends Model<Rent>{
 
-    @Column({ allowNull: false, defaultValue: new Date() })
+    static RENT = 'rented';
+    static RETURNED = 'returned';
+
+    @Column({ allowNull: false, defaultValue: new Date(), type: DataType.DATE })
     from_date: string;
 
-    @Column({ allowNull: false, defaultValue: 0 })
-    to_date: number;
+    @Column({ allowNull: false, defaultValue: 0, type: DataType.DATE })
+    to_date: string;
 
     @Column({ allowNull: false, defaultValue: 0 })
     total: number;
@@ -27,4 +30,14 @@ export class Rent extends Model<Rent>{
 
     @BelongsTo(() => User)
     user: User;
+
+    @Column({ values: [Rent.RENT, Rent.RETURNED], defaultValue: Rent.RENT })
+    status: string;
+
+    @BeforeSave
+    static async updateTotal(instance: Rent) {
+        const item = await instance.$get('item');
+        const days = moment(instance.to_date).diff(instance.from_date, 'days')
+        instance.total = item.price * days;
+    }
 }

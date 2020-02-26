@@ -1,6 +1,6 @@
 import { Table, Model, Column, BeforeSave, BeforeUpdate, HasMany } from 'sequelize-typescript';
 import { hashSync } from 'bcryptjs';
-import { Rent } from 'src/rent/rent.model';
+import { Rent } from '../rent/rent.model';
 
 @Table
 export class User extends Model<User>{
