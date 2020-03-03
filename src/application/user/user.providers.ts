@@ -1,5 +1,5 @@
-import { UserRepositoryMysql } from "src/infraestructure/adapters/services/user.repository.mysql";
-import { User } from "src/infraestructure/adapters/models/user.model";
+import { UserRepositoryMysql } from "../../infraestructure/adapters/services/user.repository.mysql";
+import { User } from "../../infraestructure/adapters/models/user.model";
 import GetAllUsersUseCase from "./usecases/getAllUsers.usecase";
 import GetOneUserUseCase from "./usecases/getOneUser.usecase";
 import CreateUserUseCase from "./usecases/createUser.usecase";

@@ -16,5 +16,5 @@ export interface Repository {
      * Returns an instance of an entity
      * @param id 
      */
-    get(id: number): Promise<Model>;
+    get(id: number, args?: any): Promise<Model>;
 }

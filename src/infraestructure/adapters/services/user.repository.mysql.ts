@@ -20,7 +20,7 @@ export class UserRepositoryMysql implements Repository {
         return this.userModel.findAll();
     }
 
-    get(id: number) {
-        return this.userModel.findOne({ where: { id } });
+    get(id: number, args?: any) {
+        return this.userModel.findOne({ where: { id }, ...args });
     }
 }

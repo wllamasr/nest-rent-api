@@ -1,7 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
 import { Item } from '../models/item.model';
-import { ItemService } from '../interfaces/itemService.interface';
 import { Repository } from 'src/domain/ports/repository';
 
 @Injectable()

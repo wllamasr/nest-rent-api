@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { CreateRentValidator } from '../../domain/rents/validators/create-rent.validator';
-import GetAllRentUseCase from 'src/application/rent/usecases/getAllRent.usecase';
-import GetOneRentUseCase from 'src/application/rent/usecases/getOneRent.usecase';
-import CreateRentUseCase from 'src/application/rent/usecases/createRent.usecase';
+import GetAllRentUseCase from '../../application/rent/usecases/getAllRent.usecase';
+import GetOneRentUseCase from '../../application/rent/usecases/getOneRent.usecase';
+import CreateRentUseCase from '../../application/rent/usecases/createRent.usecase';
 
 @Controller('rent')
 export class RentController {
