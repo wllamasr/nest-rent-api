@@ -1,7 +1,15 @@
 import { User } from "../adapters/models/user.model";
 
-export const userSerializer = (user: User) => {
+export const userSerializer = (users: User | User[]) => {
 
+    if (Array.isArray(users)) {
+        return users.map(user => serializer(user))
+    }
+
+    return serializer(users);
+}
+
+const serializer = (user: User) => {
     const fields = [
         'id',
         'address',

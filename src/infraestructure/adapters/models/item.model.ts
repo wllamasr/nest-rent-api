@@ -1,4 +1,4 @@
-import { Table, Model, Column, BeforeSave, BeforeUpdate, HasMany } from 'sequelize-typescript';
+import { Table, Model, Column, HasMany } from 'sequelize-typescript';
 import { Rent } from './rent.model';
 
 @Table
