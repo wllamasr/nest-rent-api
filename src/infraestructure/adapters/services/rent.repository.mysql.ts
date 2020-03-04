@@ -1,8 +1,9 @@
-import { Injectable, HttpException, HttpStatus, Inject } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
+import { Injectable, Inject } from '@nestjs/common';
 import { Rent } from '../models/rent.model';
 import { Item } from '../models/item.model';
 import { Repository } from 'src/domain/ports/repository';
+import { OutOfStockException } from '../../../domain/exceptions/outOfStock.exeption';
+import { rentSerializer } from '../../serializers/rent.serializer';
 
 @Injectable()
 export class RentRepositoryMysql implements Repository {
@@ -14,31 +15,31 @@ export class RentRepositoryMysql implements Repository {
     ) {
 
     }
-    list(): Promise<Rent[]> {
-        return this.rentModel.findAll();
+    async list(): Promise<Rent[]> {
+        const rents = await this.rentModel.findAll();
+        return <Rent[]>rentSerializer(rents);
     }
 
-    get(id: number): Promise<Rent> {
-        return this.rentModel.findByPk(id);
+    async get(id: number): Promise<Rent> {
+        const rent = await this.rentModel.findByPk(id);
+        return <Rent>rentSerializer(rent);
     }
 
-    async create(body: any): Promise<Rent | HttpException> {
+    async create(body: any): Promise<Rent> {
         const item = await this.itemModel.findByPk(body.item_id);
+
         if (!await item.isAvailable()) {
-            throw new HttpException(
-                { message: [{ constraints: { outOfStock: 'Item is not available due to out of stock' } }] },
-                HttpStatus.BAD_REQUEST
-            );
+            throw new OutOfStockException;
         }
 
         const rent = this.rentModel.build(body);
         await rent.save();
-        return rent;
+        return <Rent>rentSerializer(rent);
     }
 
     async update(id: number, body: any) {
         const rent = await this.rentModel.findByPk(id);
         await rent.update(body);
-        return rent;
+        return <Rent>rentSerializer(rent);
     }
 }

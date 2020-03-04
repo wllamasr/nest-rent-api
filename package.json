@@ -13,11 +13,11 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "DEBUG=testcontainers jest --ci --verbose  --detectOpenHandles",
+    "test": "jest --ci --verbose  --detectOpenHandles",
     "test:watch": "jest --watch",
-    "test:cov": "DEBUG=testcontainers jest --coverage",
+    "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "DEBUG=testcontainers jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^6.10.14",
