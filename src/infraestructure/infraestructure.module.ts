@@ -27,7 +27,6 @@ export class InfraestructureModule {
                     database: databaseSettings.database || process.env.DB_DATABASE,
                     synchronize: true,
                     autoLoadModels: true,
-                    logging: false,
                 }),
                 SequelizeModule.forFeature([User, Rent, Item])
             ],

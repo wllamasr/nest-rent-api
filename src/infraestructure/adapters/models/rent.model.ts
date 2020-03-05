@@ -11,7 +11,7 @@ export class Rent extends Model<Rent>{
     @Column({ allowNull: false, defaultValue: new Date(), type: DataType.DATEONLY })
     from_date: string;
 
-    @Column({ allowNull: false, defaultValue: moment().format(), type: DataType.DATEONLY })
+    @Column({ allowNull: false, defaultValue: moment().format('YYYY-MM-DD'), type: DataType.DATEONLY })
     to_date: string;
 
     @Column({ allowNull: false, defaultValue: 0 })
