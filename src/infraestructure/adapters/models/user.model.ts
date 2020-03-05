@@ -19,9 +19,6 @@ export class User extends Model<User>{
     @Column({ allowNull: false })
     address: string;
 
-    @Column({ values: ['administrador', 'usuario'], defaultValue: 'usuario' })
-    rol: string;
-
     @HasMany(() => Rent)
     rents: Rent[];
 }

@@ -15,7 +15,6 @@ const serializer = (user: User) => {
         'address',
         'name',
         'email',
-        'rol',
         'phone',
         'dni'
     ];

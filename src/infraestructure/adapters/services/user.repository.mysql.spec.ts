@@ -12,7 +12,6 @@ import { userSerializer } from "../../serializers/user.serializer";
 let user_base = {
     name: "test",
     email: "test@test.com",
-    rol: 'usuario',
     password: "test",
     address: "test",
     dni: "12345",

@@ -16,7 +16,7 @@ export class RentRepositoryMysql implements Repository {
 
     }
     async list(): Promise<Rent[]> {
-        const rents = await this.rentModel.findAll();
+        const rents = await this.rentModel.findAll({ include: ['user', 'item'] });
         return <Rent[]>rentSerializer(rents);
     }
 

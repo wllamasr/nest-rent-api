@@ -98,7 +98,7 @@ describe('', () => {
 
             expect(response.length).toBe(rents.length);
 
-            expect(rentSerializer(rents)).toMatchObject(rentSerializer(response));
+            expect(response).toMatchObject(rentSerializer(rents));
         })
     })
 
