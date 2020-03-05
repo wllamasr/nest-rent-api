@@ -21,7 +21,7 @@ export class RentRepositoryMysql implements Repository {
     }
 
     async get(id: number): Promise<Rent> {
-        const rent = await this.rentModel.findByPk(id);
+        const rent = await this.rentModel.findByPk(id, { include: ['user', 'item'] });
         return <Rent>rentSerializer(rent);
     }
 

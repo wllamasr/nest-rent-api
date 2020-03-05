@@ -17,6 +17,8 @@ const serializer = (rent: Rent) => {
         'user_id',
         'item_id',
         'total',
+        'status',
+        'toPay',
         'item',
         'user'
     ];
