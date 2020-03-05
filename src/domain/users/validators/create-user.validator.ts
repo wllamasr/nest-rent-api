@@ -7,9 +7,6 @@ export class CreateUserValidator {
     name: string;
 
     @IsString()
-    password: string;
-
-    @IsString()
     phone: number;
 
     @IsString()
