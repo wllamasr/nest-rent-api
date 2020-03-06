@@ -1,15 +1,23 @@
-import { IsString, IsNumber, IsDate, MinDate, IsDateString } from 'class-validator';
+import { IsString, IsNumber, IsIn, IsOptional } from 'class-validator';
+import { Rent } from 'src/infraestructure/adapters/models/rent.model';
 export class CreateRentValidator {
     @IsNumber()
+    @IsOptional()
     item_id: number;
 
     @IsNumber()
+    @IsOptional()
     user_id: number;
 
-    // @IsDateString()
-    // @MinDate(new Date)
+    @IsString()
+    @IsOptional()
     from_date: any;
 
-    // @IsDate()
+    @IsString()
+    @IsOptional()
     to_date: any;
+
+    @IsIn([Rent.RENT, Rent.RETURNED])
+    @IsOptional()
+    status: string;
 }

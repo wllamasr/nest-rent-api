@@ -8,6 +8,9 @@ import { Item } from "../models/item.model";
 import { rentSerializer } from "../../serializers/rent.serializer";
 import { RentRepositoryMysql } from './rent.repository.mysql';
 import moment from 'moment';
+
+moment.defaultFormat = 'YYYY-MM-DD'
+
 describe('', () => {
     let rents: Array<Rent> = [];
     let rentRepository: RentRepositoryMysql;
@@ -15,8 +18,8 @@ describe('', () => {
     let base_rent = {
         item_id: 0,
         user_id: 0,
-        from_date: `${moment().format('YYYY-MM-DD')}`,
-        to_date: `${moment().add(5, 'days').format('YYYY-MM-DD')}`
+        from_date: `${moment().format()}`,
+        to_date: `${moment().add(5, 'days').format()}`
     };
     let base_item = {
         name: "ITEM",

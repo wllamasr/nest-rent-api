@@ -4,11 +4,13 @@ import { RentRepositoryMysql } from "../../infraestructure/adapters/services/ren
 import GetAllRentUseCase from "./usecases/getAllRent.usecase";
 import GetOneRentUseCase from "./usecases/getOneRent.usecase";
 import CreateRentUseCase from "./usecases/createRent.usecase";
+import UpdateRentUseCase from "./usecases/updateRent.usecase";
 
 export const rentProviders = [
     GetAllRentUseCase,
     GetOneRentUseCase,
     CreateRentUseCase,
+    UpdateRentUseCase,
     {
         provide: "RentRepository",
         useClass: RentRepositoryMysql

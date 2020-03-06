@@ -17,4 +17,10 @@ export interface Repository {
      * @param id 
      */
     get(id: number, args?: any): Promise<Model>;
+
+    /**
+     * Update an instance of an entity
+     */
+
+    update?(id: number, body: any): Promise<Model>;
 }

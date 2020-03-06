@@ -25,8 +25,8 @@ describe('Rent (e2e)', () => {
     let base_rent = {
         item_id: 1,
         user_id: 1,
-        from_date: `${moment().format('YYYY-MM-DD')}`,
-        to_date: `${moment().add(2, 'days').format('YYYY-MM-DD')}`
+        from_date: `${moment().format()}`,
+        to_date: `${moment().add(2, 'days').format()}`
     };
 
     let base_user = {
