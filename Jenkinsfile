@@ -39,8 +39,6 @@ pipeline{
             steps{
                 echo '==========executing tests========'
                 sh 'npm run test'
-            }
-            steps{
                 echo '==========executing e2e tests========'
                 sh 'npm run test:e2e'
             }
