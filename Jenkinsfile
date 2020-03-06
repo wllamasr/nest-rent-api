@@ -42,6 +42,15 @@ pipeline{
                 echo '==========executing e2e tests========'
                 sh 'npm run test:e2e'
             }
+        }
+
+        stage('Analisis codigo'){
+            steps{
+                echo '------------>Análisis de código estático<------------'
+                withSonarQubeEnv('Sonar') {
+                    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+                }
+            }
         } 
     }
 
