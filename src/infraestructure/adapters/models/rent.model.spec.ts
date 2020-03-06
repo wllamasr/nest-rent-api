@@ -93,11 +93,7 @@ describe('test', () => {
             })
         })
 
-        describe('daysToFinishRental', () => {
-            it('returns 5', () => {
-                expect(rent.daysToFinishRental()).toEqual(5);
-            })
-        })
+
 
         describe('total calculation', () => {
 
@@ -110,8 +106,16 @@ describe('test', () => {
                 await rent.save()
                 expect(rent.toPay).toEqual(510);
             })
+
         });
 
+        describe('daysToFinishRental', () => {
+            it('returns 5', async () => {
+                rent.toDate = moment().add(7, 'day');
+                await rent.save();
+                expect(rent.daysToFinishRental()).toEqual(7);
+            })
+        })
 
     })
 })
