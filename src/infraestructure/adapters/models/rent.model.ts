@@ -41,7 +41,6 @@ export class Rent extends Model<Rent>{
     @Column(DataType.VIRTUAL(DataType.STRING))
     get toPay(this: Rent) {
         const daysToFinish = this.daysToFinishRental() * -1;
-        console.log(daysToFinish);
         if (this.isRented() && daysToFinish > 0) {
             const percent = 1.1;
             const itemPrice = this.item.price * percent;

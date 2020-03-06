@@ -93,6 +93,12 @@ describe('test', () => {
             })
         })
 
+        describe('daysToFinishRental', () => {
+            it('returns 5', () => {
+                expect(rent.daysToFinishRental()).toEqual(5);
+            })
+        })
+
         describe('total calculation', () => {
 
             it('should return the total of the rent ', () => {
@@ -104,6 +110,8 @@ describe('test', () => {
                 await rent.save()
                 expect(rent.toPay).toEqual(510);
             })
-        })
+        });
+
+
     })
 })
