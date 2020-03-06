@@ -100,8 +100,8 @@ describe('Rent (e2e)', () => {
 
                 expect(status).toBe(HttpStatus.BAD_REQUEST)
                 expect(typeof body).toBe('object');
-                expect(body.message).toBeDefined();
-                expect(Array.isArray(body.message)).toBe(true);
+                expect(body.error).toBeDefined();
+                expect(body.error).toEqual('Item is not available due to out of stock');
             });
         })
     });

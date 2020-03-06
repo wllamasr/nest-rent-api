@@ -55,9 +55,7 @@ export class Rent extends Model<Rent>{
 
     @BeforeSave
     static async updateTotal(instance: Rent) {
-        const item = await instance.$get('item');
-        const days = moment(instance.to_date).diff(instance.from_date, 'days')
-        instance.total = item.price * days;
+        instance.total = await instance.calculateTotal();
     }
 
     @BeforeFind
@@ -74,6 +72,17 @@ export class Rent extends Model<Rent>{
             .diff(
                 moment().format(), 'day'
             );
+    }
+
+    async calculateTotal() {
+        const item = await this.$get('item');
+
+        if (this.isNewRecord || this.daysToFinishRental() > 0) {
+            const days = moment(this.to_date).diff(this.from_date, 'days')
+            return item.price * days;
+        }
+
+        return this.total + (item.price * (this.daysToFinishRental() * -1))
     }
 
     isRented(): boolean {

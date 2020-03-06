@@ -1,5 +1,5 @@
 import { IsString, IsNumber, IsIn, IsOptional } from 'class-validator';
-import { Rent } from 'src/infraestructure/adapters/models/rent.model';
+import { Rent } from '../../../infraestructure/adapters/models/rent.model';
 export class CreateRentValidator {
     @IsNumber()
     @IsOptional()

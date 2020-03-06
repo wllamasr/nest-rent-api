@@ -3,7 +3,7 @@ import { CreateRentValidator } from '../../domain/rents/validators/create-rent.v
 import GetAllRentUseCase from '../../application/rent/usecases/getAllRent.usecase';
 import GetOneRentUseCase from '../../application/rent/usecases/getOneRent.usecase';
 import CreateRentUseCase from '../../application/rent/usecases/createRent.usecase';
-import UpdateRentUseCase from 'src/application/rent/usecases/updateRent.usecase';
+import UpdateRentUseCase from '../../application/rent/usecases/updateRent.usecase';
 
 @Controller('rent')
 export class RentController {
