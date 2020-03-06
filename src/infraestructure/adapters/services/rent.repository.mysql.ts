@@ -27,7 +27,7 @@ export class RentRepositoryMysql implements Repository {
     }
 
     async create(body: any): Promise<Rent> {
-        const item = await this.itemModel.findByPk(body.item_id);
+        const item = await this.itemModel.findByPk(body.itemId);
 
         if (!await item.isAvailable()) {
             throw new OutOfStockException;

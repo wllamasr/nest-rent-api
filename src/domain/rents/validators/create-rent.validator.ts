@@ -3,19 +3,19 @@ import { Rent } from '../../../infraestructure/adapters/models/rent.model';
 export class CreateRentValidator {
     @IsNumber()
     @IsOptional()
-    item_id: number;
+    itemId: number;
 
     @IsNumber()
     @IsOptional()
-    user_id: number;
+    userId: number;
 
     @IsString()
     @IsOptional()
-    from_date: any;
+    fromDate: any;
 
     @IsString()
     @IsOptional()
-    to_date: any;
+    toDate: any;
 
     @IsIn([Rent.RENT, Rent.RETURNED])
     @IsOptional()

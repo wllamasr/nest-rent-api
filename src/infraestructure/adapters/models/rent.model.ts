@@ -9,24 +9,24 @@ export class Rent extends Model<Rent>{
     static RETURNED = 'returned';
 
     @Column({ allowNull: false, defaultValue: new Date(), type: DataType.DATEONLY })
-    from_date: string;
+    fromDate: string;
 
     @Column({ allowNull: false, defaultValue: moment().format(), type: DataType.DATEONLY })
-    to_date: string;
+    toDate: string;
 
     @Column({ allowNull: false, defaultValue: 0 })
     total: number;
 
     @ForeignKey(() => Item)
     @Column
-    item_id: number;
+    itemId: number;
 
     @BelongsTo(() => Item)
     item: Item;
 
     @ForeignKey(() => User)
     @Column
-    user_id: number;
+    userId: number;
 
     @BelongsTo(() => User)
     user: User;
@@ -41,13 +41,14 @@ export class Rent extends Model<Rent>{
     @Column(DataType.VIRTUAL(DataType.STRING))
     get toPay(this: Rent) {
         const daysToFinish = this.daysToFinishRental() * -1;
-
+        console.log(daysToFinish);
         if (this.isRented() && daysToFinish > 0) {
-            const itemPrice = this.item.price * 1.1;
+            const percent = 1.1;
+            const itemPrice = this.item.price * percent;
 
             return Math.ceil(
                 this.total + (itemPrice * daysToFinish)
-            )
+            );
         }
 
         return this.total;
@@ -55,34 +56,15 @@ export class Rent extends Model<Rent>{
 
     @BeforeSave
     static async updateTotal(instance: Rent) {
-        instance.total = await instance.calculateTotal();
-    }
-
-    @BeforeFind
-    @AfterFind
-    static async updateDates(instance: Rent) {
-        instance.createdAt = moment(instance.createdAt).format()
-        instance.updatedAt = moment(instance.updatedAt).format()
-        instance.from_date = moment(instance.from_date).format()
-        instance.to_date = moment(instance.to_date).format()
+        const item = await instance.$get('item');
+        instance.total = moment(instance.toDate).diff(instance.fromDate, 'days') * item.price;
     }
 
     daysToFinishRental(): number {
-        return moment(this.to_date)
+        return moment(this.toDate)
             .diff(
                 moment().format(), 'day'
             );
-    }
-
-    async calculateTotal() {
-        const item = await this.$get('item');
-
-        if (this.isNewRecord || this.daysToFinishRental() > 0) {
-            const days = moment(this.to_date).diff(this.from_date, 'days')
-            return item.price * days;
-        }
-
-        return this.total + (item.price * (this.daysToFinishRental() * -1))
     }
 
     isRented(): boolean {

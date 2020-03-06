@@ -16,10 +16,10 @@ describe('', () => {
     let rentRepository: RentRepositoryMysql;
     let container: StartedTestContainer;
     let base_rent = {
-        item_id: 0,
-        user_id: 0,
-        from_date: `${moment().format()}`,
-        to_date: `${moment().add(5, 'days').format()}`
+        itemId: 0,
+        userId: 0,
+        fromDate: `${moment().format()}`,
+        toDate: `${moment().add(5, 'days').format()}`
     };
     let base_item = {
         name: "ITEM",
@@ -78,8 +78,8 @@ describe('', () => {
         beforeEach(async () => {
             const item = await Item.create(base_item);
             const user = await User.create(user_base);
-            base_rent.user_id = user.id;
-            base_rent.item_id = item.id;
+            base_rent.userId = user.id;
+            base_rent.itemId = item.id;
             const rent = await Rent.create(base_rent)
             rents.push(rent)
         });

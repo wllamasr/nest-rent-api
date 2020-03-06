@@ -12,10 +12,10 @@ export const rentSerializer = (rents: Rent | Rent[]) => {
 const serializer = (rent: Rent) => {
     const fields = [
         'id',
-        'from_date',
-        'to_date',
-        'user_id',
-        'item_id',
+        'fromDate',
+        'toDate',
+        'userId',
+        'itemId',
         'total',
         'status',
         'toPay',
