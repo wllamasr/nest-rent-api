@@ -6,20 +6,14 @@ import { Rent } from "../models/rent.model";
 import { Item } from "../models/item.model";
 import { User } from "../models/user.model";
 import moment from 'moment';
+import { userBase, itemBase, rentBase } from '../../../../test/baseEntities';
 
 moment.defaultFormat = 'YYYY-MM-DD';
 
 describe('test', () => {
 
     let container: StartedTestContainer;
-    let user_base = {
-        name: "test",
-        email: "test@test.com",
-        password: "test",
-        address: "test",
-        dni: "12345",
-        phone: "123456789"
-    };
+
     const DATABASE_PORT = 3306;
     const DATABASE_NAME = 'test';
     const DATABASE_PASSWORD = 'true';
@@ -62,27 +56,11 @@ describe('test', () => {
         let user;
         let item;
         beforeAll(async () => {
-            user = await User.create({
-                name: "test",
-                email: "test@test.com",
-                password: "test",
-                address: "test",
-                dni: "12345",
-                phone: "123456789"
-            });
+            user = await User.create(userBase);
 
-            item = await Item.create({
-                name: "ITEM",
-                price: 100,
-                amount: 2
-            });
+            item = await Item.create(itemBase);
 
-            rent = await Rent.create({
-                itemId: item.id,
-                userId: user.id,
-                fromDate: `${moment().subtract(5, 'days').format()}`,
-                toDate: `${moment().format()}`
-            });
+            rent = await Rent.create(rentBase(item.id, user.id));
 
             rent.item = item;
         })
