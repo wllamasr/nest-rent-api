@@ -3,20 +3,12 @@ import { GenericContainer, Wait, StartedTestContainer } from 'testcontainers';
 import { TestingModule, Test } from "@nestjs/testing";
 import { InfraestructureModule } from "../../../infraestructure/infraestructure.module";
 import { SequelizeModule } from "@nestjs/sequelize";
-import { Sequelize } from 'sequelize';
 import { User } from "../models/user.model";
 import { Rent } from "../models/rent.model";
 import { Item } from "../models/item.model";
 import { userSerializer } from "../../serializers/user.serializer";
+import { userBase } from '../../../../test/baseEntities';
 
-let user_base = {
-    name: "test",
-    email: "test@test.com",
-    password: "test",
-    address: "test",
-    dni: "12345",
-    phone: "123456789"
-};
 let users: Array<any> = [];
 describe('userRepositoryMysql', () => {
     let userRepository: UserRepositoryMysql;
@@ -60,7 +52,7 @@ describe('userRepositoryMysql', () => {
 
     describe('get one user', () => {
         beforeEach(async () => {
-            users.push(await User.create(user_base))
+            users.push(await User.create(userBase))
         });
 
         it('get one existing user', async () => {
@@ -81,9 +73,9 @@ describe('userRepositoryMysql', () => {
 
     describe('get all uses', () => {
         beforeEach(async () => {
-            users.push(await User.create({ ...user_base, email: 'test1@test.com' }))
-            users.push(await User.create({ ...user_base, email: 'test2@test.com' }))
-            users.push(await User.create({ ...user_base, email: 'test3@test.com' }))
+            users.push(await User.create({ ...userBase, email: 'test1@test.com' }))
+            users.push(await User.create({ ...userBase, email: 'test2@test.com' }))
+            users.push(await User.create({ ...userBase, email: 'test3@test.com' }))
         });
 
         it('returns all items', async () => {
@@ -100,7 +92,7 @@ describe('userRepositoryMysql', () => {
 
     describe('create one user', () => {
         it('creates the user', async () => {
-            let user = { ...user_base, email: 'test4@test.com' };
+            let user = { ...userBase, email: 'test4@test.com' };
             const response = await userRepository.create(user);
             expect(response).toBeDefined();
             expect(typeof response).toBe('object');

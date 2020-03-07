@@ -8,6 +8,7 @@ import { Item } from "../models/item.model";
 import { rentSerializer } from "../../serializers/rent.serializer";
 import { RentRepositoryMysql } from './rent.repository.mysql';
 import moment from 'moment';
+import { itemBase, userBase, rentBase } from '../../../../test/baseEntities';
 
 moment.defaultFormat = 'YYYY-MM-DD'
 
@@ -15,26 +16,7 @@ describe('', () => {
     let rents: Array<Rent> = [];
     let rentRepository: RentRepositoryMysql;
     let container: StartedTestContainer;
-    let base_rent = {
-        itemId: 0,
-        userId: 0,
-        fromDate: `${moment().format()}`,
-        toDate: `${moment().add(5, 'days').format()}`
-    };
-    let base_item = {
-        name: "ITEM",
-        price: 456789,
-        amount: 56
-    };
-    let user_base = {
-        name: "test",
-        email: "test@test.com",
-        rol: 'usuario',
-        password: "test",
-        address: "test",
-        dni: "12345",
-        phone: "123456789"
-    };
+
     const DATABASE_PORT = 3306;
     const DATABASE_NAME = 'test';
     const DATABASE_PASSWORD = 'true';
@@ -76,11 +58,9 @@ describe('', () => {
 
     describe('get one rent', () => {
         beforeEach(async () => {
-            const item = await Item.create(base_item);
-            const user = await User.create(user_base);
-            base_rent.userId = user.id;
-            base_rent.itemId = item.id;
-            const rent = await Rent.create(base_rent)
+            const item = await Item.create(itemBase);
+            const user = await User.create(userBase);
+            const rent = await Rent.create(rentBase(item.id, user.id))
             rents.push(rent)
         });
 
@@ -107,6 +87,7 @@ describe('', () => {
 
     describe('create one rent', () => {
         it('creates the rent', async () => {
+            let base_rent = rentBase(1, 1);
             let response = <Rent>(await rentRepository.create(base_rent));
             expect(response).toBeDefined();
             expect(typeof response).toBe('object');

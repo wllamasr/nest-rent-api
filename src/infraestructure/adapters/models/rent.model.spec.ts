@@ -40,9 +40,6 @@ describe('test', () => {
                 SequelizeModule.forFeature([Rent, Item, User])
             ],
             providers: [
-                { provide: 'Rent', useValue: Rent },
-                { provide: 'Item', useValue: Item },
-                { provide: 'User', useValue: User },
             ]
         }).compile();
     })

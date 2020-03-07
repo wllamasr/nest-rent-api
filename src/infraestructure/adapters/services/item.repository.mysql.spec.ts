@@ -8,16 +8,11 @@ import { Rent } from "../models/rent.model";
 import { Item } from "../models/item.model";
 import { ItemRepositoryMysql } from "./item.repository.mysql";
 import { itemSerializer } from "../../serializers/item.serializer";
-
+import { itemBase } from '../../../../test/baseEntities';
 describe('', () => {
     let items: Array<Item> = [];
     let itemRepository: ItemRepositoryMysql;
     let container: StartedTestContainer;
-    let base_item = {
-        name: "ITEM",
-        price: 456789,
-        amount: 56
-    };
     const DATABASE_PORT = 3306;
     const DATABASE_NAME = 'test';
     const DATABASE_PASSWORD = 'true';
@@ -57,7 +52,7 @@ describe('', () => {
 
     describe('get one item', () => {
         beforeEach(async () => {
-            const item = await Item.create(base_item)
+            const item = await Item.create(itemBase)
             items.push(item)
         });
 
@@ -84,11 +79,11 @@ describe('', () => {
 
     describe('create one item', () => {
         it('creates the user', async () => {
-            const response = await itemRepository.create(base_item);
+            const response = await itemRepository.create(itemBase);
             expect(response).toBeDefined();
             expect(typeof response).toBe('object');
-            base_item['id'] = response.id;
-            expect(base_item).toMatchObject(itemSerializer(response));
+            itemBase['id'] = response.id;
+            expect(itemBase).toMatchObject(itemSerializer(response));
         })
     })
 
