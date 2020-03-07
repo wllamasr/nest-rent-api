@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, Param, Delete, Put, Inject } from '@nestjs/common';
-import { CreateUserValidator } from '../../domain/users/validators/create-user.validator';
+import { UserDto } from '../../domain/user.dto';
 
 import GetAllUsersUseCase from '../../application/user/usecases/getAllUsers.usecase';
 import GetOneUserUseCase from '../../application/user/usecases/getOneUser.usecase';
@@ -23,7 +23,7 @@ export class UsersController {
      * @returns User | The user created
      */
     @Post()
-    create(@Body() body: CreateUserValidator) {
+    create(@Body() body: UserDto) {
         return this.createUserUseCase.handle(body);
     }
 

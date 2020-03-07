@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'src/domain/ports/repository';
-import { CreateRentValidator } from 'src/domain/rents/validators/create-rent.validator';
+import { RentDto } from '../../../domain/rent.dto';
 
 @Injectable()
 export default class UpdateRentUseCase {
@@ -8,7 +8,7 @@ export default class UpdateRentUseCase {
         @Inject('RentRepository') private rentService: Repository,
     ) { }
 
-    public handler(id: number, body: CreateRentValidator) {
+    public handler(id: number, body: RentDto) {
         return this.rentService.update(id, body);
     }
 }

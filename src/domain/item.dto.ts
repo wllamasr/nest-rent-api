@@ -1,5 +1,5 @@
 import { IsString, IsNumber } from 'class-validator';
-export class CreateItemValidator {
+export class ItemDto {
     @IsString()
     name: string;
 

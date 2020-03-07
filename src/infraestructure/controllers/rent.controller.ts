@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Post, Body, Put } from '@nestjs/common';
-import { CreateRentValidator } from '../../domain/rents/validators/create-rent.validator';
+import { RentDto } from '../../domain/rent.dto';
 import GetAllRentUseCase from '../../application/rent/usecases/getAllRent.usecase';
 import GetOneRentUseCase from '../../application/rent/usecases/getOneRent.usecase';
 import CreateRentUseCase from '../../application/rent/usecases/createRent.usecase';
@@ -20,7 +20,7 @@ export class RentController {
     }
 
     @Post()
-    newRent(@Body() body: CreateRentValidator) {
+    newRent(@Body() body: RentDto) {
         return this.createRentUseCase.handler(body);
     }
 
@@ -32,7 +32,7 @@ export class RentController {
     @Put(':id')
     update(
         @Param('id') id: number,
-        @Body() body: CreateRentValidator
+        @Body() body: RentDto
     ) {
         return this.updateRentUseCase.handler(id, body);
     }

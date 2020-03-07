@@ -4,7 +4,7 @@ import { Item } from '../models/item.model';
 import { Repository } from 'src/domain/ports/repository';
 import { OutOfStockException } from '../../../domain/exceptions/outOfStock.exeption';
 import { rentSerializer } from '../../serializers/rent.serializer';
-import { CreateRentValidator } from 'src/domain/rents/validators/create-rent.validator';
+import { RentDto } from 'src/domain/rent.dto';
 
 @Injectable()
 export class RentRepositoryMysql implements Repository {
@@ -38,7 +38,7 @@ export class RentRepositoryMysql implements Repository {
         return <Rent>rentSerializer(rent);
     }
 
-    async update(id: number, body: CreateRentValidator) {
+    async update(id: number, body: RentDto) {
         const rent = await this.rentModel.findByPk(id);
         await rent.update(body);
         return <Rent>rentSerializer(rent);

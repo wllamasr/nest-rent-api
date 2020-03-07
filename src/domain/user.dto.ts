@@ -1,5 +1,5 @@
-import { IsAlpha, IsEmail, IsString, IsNumber } from 'class-validator';
-export class CreateUserValidator {
+import { IsEmail, IsString } from 'class-validator';
+export class UserDto {
     @IsEmail()
     email: string;
 

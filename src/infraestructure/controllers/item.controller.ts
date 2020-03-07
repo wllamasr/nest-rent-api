@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 
-import { CreateItemValidator } from '../../domain/items/validators/create-item.validator';
+import { ItemDto } from '../../domain/item.dto';
 import GetAllItemUseCase from '../../application/item/usecases/getAllItems.usecase';
 import GetOneItemUseCase from '../../application/item/usecases/getOneItem.usecase';
 import CreateItemUseCase from '../../application/item/usecases/createItem.usecase';
@@ -25,7 +25,7 @@ export class ItemController {
     }
 
     @Post()
-    create(@Body() body: CreateItemValidator) {
+    create(@Body() body: ItemDto) {
         return this.createItemUseCase.handler(body);
     }
 }
