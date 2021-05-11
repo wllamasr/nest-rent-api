@@ -26,7 +26,7 @@
     "@nestjs/platform-express": "^6.10.14",
     "@nestjs/sequelize": "0.0.2",
     "bcryptjs": "^2.4.3",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.11.0",
     "compression": "^1.7.4",
     "moment": "^2.24.0",
